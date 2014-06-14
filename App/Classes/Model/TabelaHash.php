@@ -10,20 +10,16 @@ class TabelaHash {
         return $cpf % TabelaHash::Tamanho;
     }
 
-    private function cadastrarProximaPosicao($pessoa, $chaveHash, $sair = FALSE) {
+    private function cadastrarProximaPosicao($pessoa, $chaveHash, $qtdVoltas = 0) {
         $chaveHash = $chaveHash + 1;
 
         if (in_array($chaveHash, $this->hash)) {
             if (count($this->hash) <= TabelaHash::Tamanho) {
                 $this->cadastrarProximaPosicao($pessoa, $chaveHash);
             } else {
-                if($sair == FALSE){
-                    $this->cadastrarProximaPosicao($pessoa, 0, 1);
-                } else{
-                    $this->cadastrarProximaPosicao($pessoa, 0, 2);
-                }
+                $this->cadastrarProximaPosicao($pessoa, 0, $qtdVoltas++);
             }
-        } elseif ($sair == 2) {
+        } elseif ($qtdVoltas > 1) {
             throw new Exception('Tabela cheia!');
         } else {
             $this->hash[$chaveHash] = $pessoa;
