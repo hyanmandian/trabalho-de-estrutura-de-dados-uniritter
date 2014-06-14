@@ -2,39 +2,35 @@
 
 class TabelaHash {
 
-    const Tamanho = 20;
+    const Tamanho = 4;
 
     public $hash = array();
+
+    public function __construct() {
+        for ($i = 0; $i < TabelaHash::Tamanho; $i++) {
+            $this->hash[$i] = array();
+        }
+    }
 
     private function gerarChaveHash($cpf) {
         return $cpf % TabelaHash::Tamanho;
     }
-
-    private function cadastrarProximaPosicao($paciente, $chaveHash, $qtdVoltas = 0) {
-        $chaveHash = $chaveHash + 1;
-
-        if (array_key_exists($chaveHash, $this->hash)) {
-            if (count($this->hash) <= TabelaHash::Tamanho) {
-                $this->cadastrarProximaPosicao($paciente, $chaveHash);
-            } else {
-                $this->cadastrarProximaPosicao($paciente, 0, $qtdVoltas++);
+    
+    public function verificaCpf($cpf){
+        $pacientes = $this->pesquisar($cpf);
+        
+        foreach($pacientes as $paciente){
+            if($paciente->getCpf() == $cpf){
+                return $paciente;
             }
-        } elseif ($qtdVoltas > 1) {
-            throw new Exception('Tabela cheia!');
-        } else {
-            $this->hash[$chaveHash] = $paciente;
         }
+        
+        return FALSE;
     }
-
+    
     public function cadastrar($paciente) {
         if (count($this->hash) <= TabelaHash::Tamanho) {
-            if (array_key_exists($this->gerarChaveHash($paciente->getCpf()), $this->hash)) {
-                $this->cadastrarProximaPosicao($paciente, $this->gerarChaveHash($paciente->getCpf()));
-            } else {
-                $this->hash[$this->gerarChaveHash($paciente->getCpf())] = $paciente;
-            }
-        } else {
-            throw new Exception('Tabela cheia!');
+            array_push($this->hash[$this->gerarChaveHash($paciente->getCpf())], $paciente);
         }
     }
 
@@ -45,7 +41,7 @@ class TabelaHash {
             return $this->hash[$chaveHash];
         }
 
-        throw new Exception('Tabela cheia!');
+        throw new Exception('Paciente não cadastrado');
     }
 
 }
