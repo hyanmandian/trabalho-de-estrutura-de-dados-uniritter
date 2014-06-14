@@ -4,34 +4,34 @@ class TabelaHash {
 
     const Tamanho = 20;
 
-    private $hash = array();
+    public $hash = array();
 
     private function gerarChaveHash($cpf) {
         return $cpf % TabelaHash::Tamanho;
     }
 
-    private function cadastrarProximaPosicao($pessoa, $chaveHash, $qtdVoltas = 0) {
+    private function cadastrarProximaPosicao($paciente, $chaveHash, $qtdVoltas = 0) {
         $chaveHash = $chaveHash + 1;
 
-        if (in_array($chaveHash, $this->hash)) {
+        if (array_key_exists($chaveHash, $this->hash)) {
             if (count($this->hash) <= TabelaHash::Tamanho) {
-                $this->cadastrarProximaPosicao($pessoa, $chaveHash);
+                $this->cadastrarProximaPosicao($paciente, $chaveHash);
             } else {
-                $this->cadastrarProximaPosicao($pessoa, 0, $qtdVoltas++);
+                $this->cadastrarProximaPosicao($paciente, 0, $qtdVoltas++);
             }
         } elseif ($qtdVoltas > 1) {
             throw new Exception('Tabela cheia!');
         } else {
-            $this->hash[$chaveHash] = $pessoa;
+            $this->hash[$chaveHash] = $paciente;
         }
     }
 
-    public function cadastrar($pessoa) {
+    public function cadastrar($paciente) {
         if (count($this->hash) <= TabelaHash::Tamanho) {
-            if (in_array($this->gerarChaveHash($pessoa->cpf), $this->hash)) {
-                $this->cadastrarProximaPosicao($pessoa, $this->gerarChaveHash($pessoa->cpf));
+            if (array_key_exists($this->gerarChaveHash($paciente->getCpf()), $this->hash)) {
+                $this->cadastrarProximaPosicao($paciente, $this->gerarChaveHash($paciente->getCpf()));
             } else {
-                $this->hash[$this->gerarChaveHash($pessoa->cpf)] = $pessoa;
+                $this->hash[$this->gerarChaveHash($paciente->getCpf())] = $paciente;
             }
         } else {
             throw new Exception('Tabela cheia!');
@@ -41,7 +41,7 @@ class TabelaHash {
     public function pesquisar($cpf) {
         $chaveHash = $this->gerarChaveHash($cpf);
 
-        if (in_array($chaveHash, $this->hash)) {
+        if (array_key_exists($chaveHash, $this->hash)) {
             return $this->hash[$chaveHash];
         }
 

@@ -7,7 +7,15 @@ class Paciente {
     private $idade;
     private $telefone;
     private $contato;
-
+    
+    public function __construct($nome, $cpf, $idade, $telefone, $contato) {
+        $this->nome = $nome;
+        $this->cpf = $cpf;
+        $this->idade = $idade;
+        $this->telefone = $telefone;
+        $this->contato = $contato;
+    }
+    
     public function getNome() {
         return $this->nome;
     }
