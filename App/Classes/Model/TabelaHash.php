@@ -14,10 +14,10 @@ class TabelaHash {
         $chaveHash = $chaveHash + 1;
 
         if (in_array($chaveHash, $this->hash)) {
-            if ($chaveHash <= TabelaHash::Tamanho) {
+            if (count($this->hash) <= TabelaHash::Tamanho) {
                 $this->cadastrarProximaPosicao($pessoa, $chaveHash);
             } else {
-                if($sair == 1){
+                if($sair == FALSE){
                     $this->cadastrarProximaPosicao($pessoa, 0, 1);
                 } else{
                     $this->cadastrarProximaPosicao($pessoa, 0, 2);
@@ -33,7 +33,7 @@ class TabelaHash {
     public function cadastrar($pessoa) {
         if (count($this->hash) <= TabelaHash::Tamanho) {
             if (in_array($this->gerarChaveHash($pessoa->cpf), $this->hash)) {
-                $this->cadastrarProximaPosicao($pessoa, $pessoa->cpf);
+                $this->cadastrarProximaPosicao($pessoa, $this->gerarChaveHash($pessoa->cpf));
             } else {
                 $this->hash[$this->gerarChaveHash($pessoa->cpf)] = $pessoa;
             }
