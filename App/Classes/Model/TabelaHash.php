@@ -4,7 +4,7 @@ class TabelaHash {
 
     const Tamanho = 4;
 
-    public $hash = array();
+    private $hash = array();
 
     public function __construct() {
         for ($i = 0; $i < TabelaHash::Tamanho; $i++) {
@@ -29,15 +29,23 @@ class TabelaHash {
     }
     
     public function cadastrar($paciente) {
-        if (count($this->hash) <= TabelaHash::Tamanho) {
-            array_push($this->hash[$this->gerarChaveHash($paciente->getCpf())], $paciente);
-        }
+        $this->hash[$this->gerarChaveHash($paciente->getCpf())][] = $paciente;;
     }
-
+    
+    private function verificaHash($chaveHash){
+        foreach ($this->hash as $key => $value){
+            if($key == $chaveHash){
+                return TRUE;
+            }
+        }
+        
+        return FALSE;
+    }
+    
     public function pesquisar($cpf) {
         $chaveHash = $this->gerarChaveHash($cpf);
-
-        if (array_key_exists($chaveHash, $this->hash)) {
+    
+        if ($this->verificaHash($chaveHash)) {
             return $this->hash[$chaveHash];
         }
 

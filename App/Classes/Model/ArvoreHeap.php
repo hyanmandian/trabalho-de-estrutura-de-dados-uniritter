@@ -1,5 +1,5 @@
 <?php
 
-class ArvoreHeap {
+class ArvoreHeap extends SplMaxHeap{
     
 }
