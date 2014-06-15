@@ -1,6 +1,7 @@
 <?php
+include_once "../Model/Session.php";
 
-class Paciente {
+class ModelPaciente {
 
     private $nome;
     private $cpf;

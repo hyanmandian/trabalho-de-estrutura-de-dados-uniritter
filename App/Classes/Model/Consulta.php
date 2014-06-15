@@ -1,7 +1,8 @@
 <?php
-
+include_once '../Model/Session.php';
 class Consulta {
 
+    private $cpf;
     private $data;
     private $cor;
     private $diagnostico;
@@ -12,6 +13,14 @@ class Consulta {
 
     public function setData($data) {
         $this->data = $data;
+    }
+    
+    public function getCpf() {
+        return $this->$cpf;
+    }
+
+    public function setCpf($cpf) {
+        $this->$cpf = $cpf;
     }
 
     public function getCor() {

@@ -1,5 +1,7 @@
 <?php
 
+include_once '../Model/Session.php';
+
 class TabelaHash {
 
     const Tamanho = 4;
@@ -7,8 +9,16 @@ class TabelaHash {
     private $hash = array();
 
     public function __construct() {
+        $tabelaSession = Session::get("TabelaHash");
+        
+        if(!empty($tabelaSession)){
+            $this->hash = $tabelaSession;
+        }
+        
         for ($i = 0; $i < TabelaHash::Tamanho; $i++) {
-            $this->hash[$i] = array();
+            if(empty($this->hash[$i])){
+                $this->hash[$i] = array();
+            }
         }
     }
 
@@ -29,7 +39,18 @@ class TabelaHash {
     }
     
     public function cadastrar($paciente) {
-        $this->hash[$this->gerarChaveHash($paciente->getCpf())][] = $paciente;;
+        $pacientes = $this->hash[$this->gerarChaveHash($paciente->getCpf())];
+        
+        foreach($pacientes as $key => $value){
+            if ($value->getCpf() == $paciente->getCpf()){
+                $this->hash[$this->gerarChaveHash($paciente->getCpf())][$key] = $paciente;
+                Session::save("TabelaHash", $this->hash);
+                return ;
+            }
+        }
+        
+        $this->hash[$this->gerarChaveHash($paciente->getCpf())][] = $paciente;
+        Session::save("TabelaHash", $this->hash);
     }
     
     private function verificaHash($chaveHash){

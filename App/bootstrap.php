@@ -1,7 +1,6 @@
 <?php
-
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 
 define("DOCROOT", realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 

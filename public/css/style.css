@@ -7,6 +7,9 @@
 .radio{
     margin-top: 0 !important;
 }
-.pesquisa{
-    display:none;
+.alert.alert-warning{
+    margin-bottom: 25px;
+}
+.alert.alert-success{
+    margin-top: 25px;
 }

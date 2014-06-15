@@ -1,5 +1,4 @@
 <?php require "../bootstrap.php"; ?>
-
 <!doctype html>
 <html lang="pt-BR">
     <head>
@@ -29,6 +28,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.php">Hospital Passe Bem</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="fila.php">Fila de espera</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <?php
-
+include_once DOCROOT . 'Classes/Model/Session.php';
 class Prioridades {
 
     const Vermelho = 0;
@@ -7,7 +7,7 @@ class Prioridades {
     const Amarelo = 2;
     const Verde = 3;
     const Azul = 4;
-
+    
     static $perguntas = array(
         "Comprometimento da via aérea?" => Prioridades::Vermelho,
         "Respiração ineficaz?" => Prioridades::Vermelho,
@@ -30,4 +30,19 @@ class Prioridades {
         "Outros sintomas" => Prioridades::Azul,
     );
     
+    
+    static function getCor($prioridade){
+        switch ($prioridade) {
+            case 0: 
+                return "Vermelho";
+            case 1: 
+                return "Laranja";
+            case 2: 
+                return "Amarelo";
+            case 3: 
+                return "Verde";
+            case 4: 
+                return "Azul";
+        }
+    }
 }
