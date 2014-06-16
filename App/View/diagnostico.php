@@ -40,7 +40,7 @@ foreach($informacoes as $informacao){
             <td><?php echo $informacoes->getContato()?></td>
         </tr>
     </table>
-    <?php if(!empty($consultas) && $consultas[0]["cpf"] == $paciente):?>
+    <?php if(!empty($consultas)):?>
     <div class="alert alert-warning clearfix">
         <h2>Consultas anteriores do paciente</h2>
         <?php foreach ($consultas as $consulta): ?>
