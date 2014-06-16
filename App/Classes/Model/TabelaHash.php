@@ -4,7 +4,7 @@ include_once '../Model/Session.php';
 
 class TabelaHash {
 
-    const Tamanho = 4;
+    const Tamanho = 5;
 
     private $hash = array();
 
@@ -14,7 +14,7 @@ class TabelaHash {
         if(!empty($tabelaSession)){
             $this->hash = $tabelaSession;
         }
-        
+        //Adicona o valor array para todas as posições da tabela
         for ($i = 0; $i < TabelaHash::Tamanho; $i++) {
             if(empty($this->hash[$i])){
                 $this->hash[$i] = array();

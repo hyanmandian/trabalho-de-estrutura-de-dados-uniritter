@@ -13,17 +13,20 @@ class Paciente{
         $this->paciente = new ModelPaciente($paciente["nome"], $paciente["cpf"], $paciente["idade"], $paciente["telefone"], $paciente["contato"]);
     }
     
+    //Adiciona o paciente na fila de espera
     public function adicionarFila(){
         $arvoreHeap = new ArvoreHeap();
         $arvoreHeap->inserir(array($_POST["sintoma"],$this->paciente->getCpf()));
     }
     
+    //Cadastra o paciente no sistema
     public function cadastrar(){
         $tabelaHash = new TabelaHash();
         $tabelaHash->cadastrar($this->paciente);
         $this->adicionarFila();
     }
     
+    //Edita as informações do paciente
     public function editar(){
         $tabelaHash = new TabelaHash();
         $tabelaHash->editar($this->paciente);

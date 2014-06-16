@@ -11,6 +11,7 @@ class Consultas{
         }
     }
     
+    //Salva a consulta do paciente
     public function salvar($consulta){
         $this->consultas[] = $consulta;
         Session::save("Consultas", $this->consultas);

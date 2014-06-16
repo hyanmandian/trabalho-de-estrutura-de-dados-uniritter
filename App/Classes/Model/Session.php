@@ -25,6 +25,7 @@ class Session {
         foreach($_SESSION[$id[0]] as $key => $value){
             if($value[1] == $id[1]){
                 unset($_SESSION[$id[0]][$key]);
+                return ;
             }
         }
     }

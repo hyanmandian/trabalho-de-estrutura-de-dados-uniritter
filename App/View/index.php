@@ -8,7 +8,7 @@
             <div class="form-group">
                 <label for="cpf" class="col-md-1 control-label">CPF</label>
                 <div class="col-md-11">
-                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
+                    <input required="required" type="number" class="form-control" id="cpf" name="cpf" placeholder="CPF">
                 </div>
             </div>
             <input class="btn btn-block btn-info" type="submit" value="Enviar">

@@ -12,7 +12,7 @@
             <?php foreach (Prioridades::$perguntas as $key => $value): ?>
                 <div class="radio col-md-3">
                     <label>
-                        <input type="radio" name="sintoma" value="<?php echo $value; ?>"><?php echo $key ?>
+                        <input required="required" type="radio" name="sintoma" value="<?php echo $value; ?>"><?php echo $key ?>
                     </label>
                 </div>
             <?php endforeach; ?>
@@ -21,31 +21,31 @@
         <div class="form-group">
             <label for="nome" class="col-md-1 control-label">Nome</label>
             <div class="col-md-11">
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<?php echo isset($paciente) ? $paciente->getNome() : "";?>">
+                <input required="required" type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<?php echo isset($paciente) ? $paciente->getNome() : "";?>">
             </div>
         </div>
         <div class="form-group">
             <label for="cpf" class="col-md-1 control-label">CPF</label>
             <div class="col-md-11">
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" value="<?php echo isset($paciente) ? $paciente->getCpf() : "";?>">
+                <input required="required" type="number" class="form-control" id="cpf" name="cpf" placeholder="CPF" value="<?php echo isset($paciente) ? $paciente->getCpf() : "";?>">
             </div>
         </div>
         <div class="form-group">
             <label for="idade" class="col-md-1 control-label">Idade</label>
             <div class="col-md-11">
-                <input type="text" class="form-control" id="idade" name="idade" placeholder="Idade" value="<?php echo isset($paciente) ? $paciente->getIdade() : "";?>">
+                <input required="required" type="number" min="0" max="120" class="form-control" id="idade" name="idade" placeholder="Idade" value="<?php echo isset($paciente) ? $paciente->getIdade() : "";?>">
             </div>
         </div>
         <div class="form-group">
             <label for="telefone" class="col-md-1 control-label">Telefone</label>
             <div class="col-md-11">
-                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" value="<?php echo isset($paciente) ? $paciente->getTelefone() : "";?>">
+                <input required="required" type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" value="<?php echo isset($paciente) ? $paciente->getTelefone() : "";?>">
             </div>
         </div>
         <div class="form-group">
             <label for="contato" class="col-md-1 control-label">Contato</label>
             <div class="col-md-11">
-                <input type="text" class="form-control" id="contato" name="contato" placeholder="Contato" value="<?php echo isset($paciente) ? $paciente->getContato() : "";?>">
+                <input required="required" type="text" class="form-control" id="contato" name="contato" placeholder="Contato" value="<?php echo isset($paciente) ? $paciente->getContato() : "";?>">
             </div>
         </div>
         <input class="btn btn-block btn-info" type="submit" value="Enviar">
